@@ -1,0 +1,16 @@
+Bootstrap: docker
+From: python:3.11.3-slim-buster
+
+%files
+    ./files/* /data/
+
+# USER root
+%post
+    pip install /data/rhp_validation-1.5.12-py3-none-any.whl
+
+%labels
+    Author Matthew Richardson [mr83@uw.edu]
+    Version v1.5.12
+
+%help
+    This is a container for python running the RHP Validation scripts
