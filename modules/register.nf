@@ -1,9 +1,25 @@
+include { send } from 'plugin/nf-samplify'
+
+class RegistrationMessage {
+    public String sampleId;
+    public String analysisType;
+    public String resultFile;
+}
+
 process REGISTER {
 
     input:
-        path(hdr)
-        val(id)
+        val sampleId
+        val analysisType
+        path resultFilePath
+        val pubDir
 
     exec:
-    NwgcCore.publishMessage(workflow, "REGISTER BACK " + id, session)
+    def msg = new RegistrationMessage(
+        sampleId: sampleId, 
+        analysisType: analysisType, 
+        resultFile: pubDir + "/" + sampleId + ".rhp_validation_file.txt"
+    )
+    println msg
+    send(msg, "HrdfValidationPipeline")
 }

@@ -3,6 +3,9 @@
 //
 
 import nextflow.Nextflow
+import groovy.json.JsonGenerator.Options
+import groovy.json.JsonGenerator
+import groovy.json.JsonGenerator.Converter
 import java.util.concurrent.CopyOnWriteArrayList
 import com.rabbitmq.client.ConnectionFactory
 import com.rabbitmq.client.Connection
@@ -33,24 +36,40 @@ class NwgcCore {
         
     }
 
-    public static void publishMessage(workflow, String message, session) {
+    public static void publishMessage(workflow, String message) {
         try {
             if (channel != null) {
-                channel.basicPublish("", QUEUE_NAME, null, buildMessage(workflow, message, session).getBytes())
+                channel.basicPublish("", QUEUE_NAME, null, buildMessage(workflow, message).getBytes())
             }
         } catch (Exception e) {
             println e
         }
     }
 
-    public static String buildMessage(workflow, String message, session) {
+    public static String buildMessage(workflow, String message) {
         return """
         {
             "message": "${message}"
-            "launchDir": "${workflow.launchDir}"
-            "session": "${session.getStatsObserver().getStats().toString()}
-        }
+            "launchDir": "${workflow.launchDir}"        }
         """;
+    }
+
+    public static String buildJsonMessageFromClass(messageClass) {
+        def generator = new JsonGenerator.Options()
+        .excludeNulls()
+        .build();
+    
+        return generator.toJson(messageClass);
+    }
+
+    public static void publishJsonMessage(workflow, String message, session) {
+        try {
+            if (channel != null) {
+                channel.basicPublish("", QUEUE_NAME, null, message.getBytes())
+            }
+        } catch (Exception e) {
+            println e
+        }
     }
 
     /***

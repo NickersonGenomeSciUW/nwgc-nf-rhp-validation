@@ -1,6 +1,6 @@
 process RHP_VALIDATION {
 
-    // maxForks 3
+    maxForks 5
 
     // The RHP Validator will give a non-zero exit code if it 
     // determines an error in the hrdf report. We want to continue
@@ -8,21 +8,21 @@ process RHP_VALIDATION {
     // what has caused the issue
     errorStrategy 'ignore'
 
-    publishDir "hdr", mode: 'link', pattern: '*.txt'
-
     input: 
         tuple (
-            val(id),
+            val(sampleId),
             val(analysisType),
-            file(hrdfFile)
+            file(hrdfFile),
+            val(pubDir)
         )
     
     output: 
+        val sampleId, emit: sampleId
+        val analysisType, emit: analysisType
         path "*.txt", emit: hdr
-        val id, emit: id
+        val pubDir, emit: pubDir
 
-    exec:
-    NwgcCore.publishMessage(workflow, "Starting for sample " + id, session)
+    publishDir "${pubDir}", mode: 'link', pattern: '*.txt'
 
     script:
     """
@@ -33,7 +33,8 @@ process RHP_VALIDATION {
         --analysis-type $analysisType \
         --input-file $hrdfFile \
         --json \
-        > ${id}.rhp_validation_file.txt
+        > ${sampleId}.rhp_validation_file.txt
+    cat ${sampleId}.rhp_validation_file.txt        
 
     exit 0
     """

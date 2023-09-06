@@ -2,25 +2,16 @@ include { RHP_VALIDATION } from './modules/rhp_validation.nf'
 include { REGISTER } from './modules/register.nf'
 
 workflow {
-    NwgcCore.init(params)
+    def sample = Channel.from(params.samples)
+      .map{ row ->
+        String sampleId = row.id
+        String analysisType = row.analysisType
+        Path hrdfFile = file(row.hrdfFile)
+        String pubDir = row.publishDir
 
-    def sample = Channel.fromPath(params.input_csv)
-            .splitCsv(header:true)
-            .map{ row ->
-                String id = row.id
-                String analysisType = row.analysisType
-                def hrdfFile = file(row.hrdfFile)
-                return tuple(id, analysisType, hrdfFile)
-            }
+        return tuple(sampleId, analysisType, hrdfFile, pubDir)
+      }
 
     RHP_VALIDATION(sample)
     REGISTER(RHP_VALIDATION.out)
-}
-
-workflow.onError {
-    NwgcCore.error(workflow)
-}
-
-workflow.onComplete {
-    NwgcCore.processComplete(workflow)
 }

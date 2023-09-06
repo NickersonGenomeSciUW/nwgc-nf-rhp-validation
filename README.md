@@ -22,6 +22,13 @@ Run the nextflow
 ----------------
 ```shell
 module load nextflow
-nextflow stargazer.nf -params-file input.yaml -profile executorLocal,instanceSizeLow,environmentContainer
+nextflow main.nf -params-file input.yaml -profile executorLocal,instanceSizeLow,environmentContainer
 ```
 
+import pika
+import ssl
+
+credentials = pika.PlainCredentials("nf", "nf")
+ssl_options = pika.SSLOptions(context, "grc-dev.gs.washington.edu")
+parameters = pika.ConnectionParameters("grc-dev", 5671, "nextflow", credentials, ssl_options=ssl_options)
+connection = pika.BlockingConnection(parameters)
