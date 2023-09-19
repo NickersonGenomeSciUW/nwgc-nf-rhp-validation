@@ -1,12 +1,11 @@
 process RHP_VALIDATION {
 
-    maxForks 5
-
     // The RHP Validator will give a non-zero exit code if it 
     // determines an error in the hrdf report. We want to continue
     // and catch this error in the Samplify layer, that way we know
     // what has caused the issue
     errorStrategy 'ignore'
+    label "RHP_VALIDATION"
 
     input: 
         tuple (
@@ -23,8 +22,6 @@ process RHP_VALIDATION {
         val pubDir, emit: pubDir
 
     publishDir "${pubDir}", mode: 'copy', pattern: '*.txt'
-
-    label "RHP_VALIDATION_${sampleId}"
 
     script:
     """

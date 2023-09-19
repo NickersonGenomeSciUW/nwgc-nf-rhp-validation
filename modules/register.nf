@@ -8,13 +8,13 @@ class RegistrationMessage {
 
 process REGISTER {
 
+    label "RHP_REGISTRATION"
+
     input:
         val sampleId
         val analysisType
         path resultFilePath
         val pubDir
-
-    label "RHP_REGISTRATION_${sampleId}"
 
     exec:
     
