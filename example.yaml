@@ -1,14 +1,10 @@
 ---
 samples:
-- id: 744266
+- id: 1247637
   analysisType: "HDRV1"
-  hrdfFile: "/net/nwgc/vol1/data/processed/samples/744266/hdr/UW_AoU_CVL_HRDF_HDRV1_2023-09-05-10-24-59_A313873894_21082012909_0.csv"
-  publishDir: "/net/nwgc/vol1/data/processed/samples/744266/hdr"
-- id: 1227550
+  hrdfFile: "/temp/hrdfs/UW_AoU_CVL_HRDF_HDRV1_2023-09-15-08-10-18_A980939397_22221001547_0.csv"
+  publishDir: "/net/nwgc/vol1/data/processed/samples/1247637/hdr"
+- id: 1247602
   analysisType: "HDRV1"
-  hrdfFile: "/net/nwgc/vol1/data/processed/samples/1227550/hdr/UW_AoU_CVL_HRDF_HDRV1_2023-09-05-10-24-59_A738358667_22176005973_0.csv"
-  publishDir: "/net/nwgc/vol1/data/processed/samples/1227550/hdr"
-- id: 1251274
-  analysisType: "HDRV1"
-  hrdfFile: "/net/nwgc/vol1/data/processed/samples/1251274/hdr/UW_AoU_CVL_HRDF_HDRV1_2023-09-05-10-24-59_A230839569_22243005945_0.csv"
-  publishDir: "/net/nwgc/vol1/data/processed/samples/1251274/hdr"
+  hrdfFile: "/temp/hrdfs/UW_AoU_CVL_HRDF_HDRV1_2023-09-15-08-10-19_A826354119_22221001512_0.csv"
+  publishDir: "/net/nwgc/vol1/data/processed/samples/1247602/hdr"

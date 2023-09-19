@@ -22,7 +22,9 @@ process RHP_VALIDATION {
         path "*.txt", emit: hdr
         val pubDir, emit: pubDir
 
-    publishDir "${pubDir}", mode: 'link', pattern: '*.txt'
+    publishDir "${pubDir}", mode: 'copy', pattern: '*.txt'
+
+    label "RHP_VALIDATION_${sampleId}"
 
     script:
     """
@@ -34,8 +36,8 @@ process RHP_VALIDATION {
         --input-file $hrdfFile \
         --json \
         > ${sampleId}.rhp_validation_file.txt
-    cat ${sampleId}.rhp_validation_file.txt        
+    
+    cat ${sampleId}.rhp_validation_file.txt
 
-    exit 0
     """
 }

@@ -14,12 +14,16 @@ process REGISTER {
         path resultFilePath
         val pubDir
 
+    label "RHP_REGISTRATION_${sampleId}"
+
     exec:
+    
     def msg = new RegistrationMessage(
         sampleId: sampleId, 
         analysisType: analysisType, 
         resultFile: pubDir + "/" + sampleId + ".rhp_validation_file.txt"
     )
+
     println msg
     send(msg, "HrdfValidationPipeline")
 }
