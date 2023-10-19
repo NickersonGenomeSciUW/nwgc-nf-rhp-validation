@@ -1,5 +1,5 @@
 IMAGE_NAME = rhp_validation
-VERSION = 1.5.12
+VERSION = 1.5.15
 
 TAG1 = nwgc/$(IMAGE_NAME):$(VERSION)
 TAG2 = nwgc/$(IMAGE_NAME):latest

@@ -6,12 +6,12 @@ From: python:3.11.3-slim-buster
 
 # USER root
 %post
-    pip install /data/rhp_validation-1.5.12-py3-none-any.whl
+    pip install /data/rhp_validation-1.5.15-py3-none-any.whl
     apt-get update && apt-get install -y procps
 
 %labels
     Author Matthew Richardson [mr83@uw.edu]
-    Version v1.5.12
+    Version v1.5.15
 
 %help
     This is a container for python running the RHP Validation scripts

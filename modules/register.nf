@@ -7,8 +7,8 @@ class RegistrationMessage {
 }
 
 process REGISTER {
-
     label "RHP_REGISTRATION"
+    executor "local"
 
     input:
         val sampleId
