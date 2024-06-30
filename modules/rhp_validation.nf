@@ -4,16 +4,15 @@ process RHP_VALIDATION {
     // determines an error in the hrdf report. We want to continue
     // and catch this error in the Samplify layer, that way we know
     // what has caused the issue
+    maxForks 5
     errorStrategy 'ignore'
     label "RHP_VALIDATION"
 
     input: 
-        tuple (
-            val(sampleId),
-            val(analysisType),
-            file(hrdfFile),
-            val(pubDir)
-        )
+        val(sampleId),
+        val(analysisType),
+        file(hrdfFile),
+        val(pubDir)
     
     output: 
         val sampleId, emit: sampleId
