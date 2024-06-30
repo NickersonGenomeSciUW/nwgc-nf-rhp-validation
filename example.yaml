@@ -1,16 +1,5 @@
 ---
-samples:
-- id: 1247637
-  analysisType: "HDRV1"
-  hrdfFile: "/temp/hrdfs/UW_AoU_CVL_HRDF_HDRV1_2023-09-15-08-10-18_A980939397_22221001547_0.csv"
-  publishDir: "/net/nwgc/vol1/data/processed/samples/1247637/hdr"
-- id: 1247602
-  analysisType: "HDRV1"
-  hrdfFile: "/temp/hrdfs/UW_AoU_CVL_HRDF_HDRV1_2023-09-15-08-10-19_A826354119_22221001512_0.csv"
-  publishDir: "/net/nwgc/vol1/data/processed/samples/1247602/hdr"
-samplifyPluginConfig:
-  rabbitHost: "matt-richardson.local"
-  rabbitUser: "nf"
-  rabbitPassword: "RMhJggMR6jwxWqEs3wL3HL"
-  rabbitVirtualHost: "nextflow_dev"
-  ssl: false
+id: 1247637
+analysisType: "HDRV1"
+hrdfFile: "/temp/hrdfs/UW_AoU_CVL_HRDF_HDRV1_2023-09-15-08-10-18_A980939397_22221001547_0.csv"
+publishDir: "/net/nwgc/vol1/data/processed/samples/1247637/hdr"

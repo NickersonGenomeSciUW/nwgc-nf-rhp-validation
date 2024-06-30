@@ -6,19 +6,17 @@ process RHP_VALIDATION {
     // what has caused the issue
     maxForks 5
     errorStrategy 'ignore'
-    label "RHP_VALIDATION"
+    tag "${sampleId}_RHP_VALIDATION"
 
     input: 
-        val(sampleId),
-        val(analysisType),
-        file(hrdfFile),
+        val(sampleId)
+        val(analysisType)
+        path(hrdfFile)
         val(pubDir)
     
     output: 
-        val sampleId, emit: sampleId
-        val analysisType, emit: analysisType
-        path "*.txt", emit: hdr
-        val pubDir, emit: pubDir
+        path("${sampleId}.rhp_validation_file.txt"), emit: validation_file
+        env OUTFILE
 
     publishDir "${pubDir}", mode: 'copy', pattern: '*.txt'
 
@@ -34,6 +32,6 @@ process RHP_VALIDATION {
         > ${sampleId}.rhp_validation_file.txt
     
     cat ${sampleId}.rhp_validation_file.txt
-
+    OUTFILE="${pubDir}/${sampleId}.rhp_validation_file.txt"
     """
 }
